@@ -1,0 +1,29 @@
+/* my-sum-er.jj: sum numbers */
+options {
+	STATIC = false ;
+}
+PARSER_BEGIN(Sumer)
+	class Sumer {
+		static void main (String[] args) 
+		throws ParseException, TokenMgrError {
+			Sumer parser = new Sumer ( System.in ) ;
+			parser.start() ; 
+		}
+	}
+PARSER_END (Sumer)
+
+SKIP: { " " }
+SKIP: { "\n" | "\r" | "\r\n" }
+TOKEN: { < PLUS: "+" > }
+TOKEN: { < NUMBER: (["0"-"9"])+ > }
+
+void Start() :
+{}
+{
+	<NUMBER>
+	(
+		<PLUS>
+		<NUMBER>
+	)*
+	<EOF>
+}
